@@ -7,16 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>My Movie Playlist</h3>
+    <h3>Film Finder</h3>
+
+    <form method="get" action="/myMovies">
+        <button type="submit">My Movies</button>
+    </form>
 
     <div class= "card-display ">
 
+        <!-- // TO DO Modify the structure of the html. 
+        Main page to search for movies. 
+        My favourites page to look at the movies that I watched.  -->
+
+
     <div class="input_div">
-        <input type="text" required id="new-movie-name" placeholder="Movie Title">
+        <input type="text" list="search-dropdown" required id="new-movie-name" class="min-w-full" placeholder="Type in Keywords">
+        <datalist id="search-dropdown" class="dropdown-content"></datalist>
+        
         <input type="text" required id="new-movie-director" placeholder="Director">
         <input type="text" required id="new-movie-year" placeholder="Year Released">
         <button class="addButton">+</button>
     </div>
+
     <script src="index.js"></script>
 </body>
 </html>

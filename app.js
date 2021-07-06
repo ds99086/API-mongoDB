@@ -77,6 +77,9 @@ app.listen(3000, function () {
   console.log("app listening on port 3000!");
 });
 
+app.get('/myMovies', function (req, res) {{
+  res.render(myfilm);
+}})
 
 // app.get('/users', (req, res) => {
 //   //youngest listed first
