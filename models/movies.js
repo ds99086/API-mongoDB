@@ -13,7 +13,12 @@ const movie = new Schema({
     year: {
         type: String,
         required: true
+    },
+    img: {
+        type: String,
+        required: true
     }
+
 })
 
 const model = mongoose.model('Movie', movie);

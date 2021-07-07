@@ -18,14 +18,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
-//app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname + '/public')));
+// app.set('view engine', 'html');
 
 app.get('/', function (req, res) {
 
 
   res.render('index');
 });
+
 
 app.post('/update-list', async function (req, res) {
 
@@ -73,13 +74,11 @@ app.get('/load', async function (req, res) {
   res.send(response);
 })
 
+
 app.listen(3000, function () {
   console.log("app listening on port 3000!");
 });
 
-app.get('/myMovies', function (req, res) {{
-  res.render(myfilm);
-}})
 
 // app.get('/users', (req, res) => {
 //   //youngest listed first

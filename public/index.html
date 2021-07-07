@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,29 +8,23 @@
     <link href="tailwind.css" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
     <h3>Film Finder</h3>
 
-    <form method="get" action="/myMovies">
-        <button type="submit">My Movies</button>
-    </form>
-
-    <div class= "card-display ">
-
-        <!-- // TO DO Modify the structure of the html. 
-        Main page to search for movies. 
-        My favourites page to look at the movies that I watched.  -->
-
+    <a href="mymovies.html">My Movies</a>
 
     <div class="input_div">
-        <input type="text" list="search-dropdown" required id="new-movie-name" class="min-w-full" placeholder="Type in Keywords">
-        <datalist id="search-dropdown" class="dropdown-content"></datalist>
-        
-        <input type="text" required id="new-movie-director" placeholder="Director">
-        <input type="text" required id="new-movie-year" placeholder="Year Released">
-        <button class="addButton">+</button>
+        <input type="text" required id="new-movie-name" placeholder="Search movie title">
+
+    </div>
+    <div class="card-display ">
+
+        <!-- // TO DO when adding a movie, check if it already exists.   -->
+
     </div>
 
     <script src="index.js"></script>
 </body>
+
 </html>

@@ -19,7 +19,7 @@ class item {
 		
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
             <div class="w-full">
-                <img src="${itemName.img}">
+                <img src="https://image.tmdb.org/t/p/w185${itemName.img}">
             </div>
 			<div class="px-6 py-4">
 				<div class="flex items-center justify-between sm:mt-2">
