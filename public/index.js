@@ -18,28 +18,29 @@ class item {
 		let movieBox = document.createElement('div');
 		movieBox.innerHTML = `
 		
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="w-full">
-                <img class="movie-image" src="https://image.tmdb.org/t/p/w185${itemName.img}">
+        <div class="relative w-4/5 shadow-lg group container m-auto rounded-md bg-white max-w-max  flex justify-center items-center  content-div">
+            <div>
+                <img class="movie-image object-scale-down" src="${itemName.img}">
             </div>
-			<div class="px-6 py-4">
-				<div class="flex items-center justify-between sm:mt-2">
-					<div class="font-bold text-xl mb-2">
-						<h3 class="movie-title">${itemName.title}</h3>
+			<div class="absolute opacity-0 p-3 w-full h-full bg-gray-700 bg-opacity-70 hover:opacity-100 ease-in duration-200 flex flex-col justify-center" >
+				<div class="flex items-center flex-col justify-between  ">
+					<div class="font-bold text-xl m-2 ">
+						<h3 class="text-white movie-title">${itemName.title}</h3>
 					</div>
-					<div class=" text-gray-700 text-base">
+					<div class=" text-gray-200 text-base m-2">
 						<p class="movie-director">${itemName.director}</p>
 					</div>
 					<div>
-						<p class="movie-year">${itemName.year}</p>
+						<p class="movie-year text-gray-100">${itemName.year}</p>
 					</div>	
 				</div>
-				<div>
-					<button class="addButton">+ Add to my list</button>
+				<div class=" place-self-center pt-10">
+					<button class="addButton  p-0 w-8 h-8    mb-4  text-base   font-semibold  focus:outline-none transition-colors duration-200 rounded-full block  bg-transparent hover:bg-red-700  border-red-700 border-2 text-red-700 hover:text-red-200">+</button>
 				</div>
 			</div>
         </div>
-    </div>
+
+
 		`
 		movieBox.classList.add('moviebox', 'p-5');
 		container.appendChild(movieBox)
@@ -90,13 +91,23 @@ async function showMovies(results) {
 					//console.log(directorName);
 				}
 			});
+			
+			let movieImg = "";
+
+			if (movie.poster_path == null || movie.poster_path== "" || movie.poster_path == "null") {
+				console.log("null image found")
+				movieImg = "/img/poster_not_found.jpg";
+			} else {
+				movieImg  = "https://image.tmdb.org/t/p/w342" + movie.poster_path
+				console.log(movieImg);
+			}
 
 			let payload = {
 				title: movie.original_title,
 				director: directorName,
 				year: movie.release_date,
-				img: movie.poster_path
-			}
+				img: movieImg
+			} 
 			new item(payload);
 		})
 	})
