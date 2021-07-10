@@ -148,7 +148,14 @@ async function add(name, director, year, image) {
 		},
 		body: JSON.stringify(payload)
 	});
-	console.log(response);
+	console.log(response.status);
+
+	if(response.status == 200) {
+		alert("Movie added to my list");
+	} else {
+		alert("Error occured while adding movie");
+
+	}
 }
 
 load();

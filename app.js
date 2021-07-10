@@ -61,10 +61,15 @@ app.post('/update-list', async function (req, res) {
 app.post('/add', async function (req, res) {
   const newMovie = req.body;
   console.log(newMovie);
-  const response = await Movie.create(newMovie);
-  console.log(response);
 
-  res.send(response);
+  try {
+      const response = await Movie.create(newMovie);
+  console.log("response after create is" + response);
+  } catch {
+    res.sendStatus(500)
+  }
+
+  res.sendStatus(200);
 
 })
 
