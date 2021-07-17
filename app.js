@@ -60,17 +60,21 @@ app.post('/update-list', async function (req, res) {
 
 app.post('/add', async function (req, res) {
   const newMovie = req.body;
-  console.log(newMovie);
+  //console.log(newMovie);
 
-  try {
-      const response = await Movie.create(newMovie);
-  console.log("response after create is" + response);
-  } catch {
-    res.sendStatus(500)
+  const checkDup = await Movie.exists(newMovie) 
+  console.log(checkDup)
+  if (checkDup == true) { 
+    console.log("sending status 409")
+    res.sendStatus(409);
+  } else if (checkDup == false) { 
+    try {
+      await Movie.create(newMovie);
+      res.sendStatus(200);
+    } catch {
+      res.sendStatus(500)
+    }
   }
-
-  res.sendStatus(200);
-
 })
 
 app.get('/load', async function (req, res) {

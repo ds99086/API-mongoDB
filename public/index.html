@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="flex flex-col bg-black justify-center">
+    <div class="flex flex-col bg-black justify-center text-gray-200">
 
         <div class="flex justify-between p-5 pl-40 pr-40 bg-gray-900 text-gray-200">
             <a href="index.html" class="text-gray-200">Film Finder</a>
@@ -18,36 +18,35 @@
             <a href="mymovies.html" class="text-gray-200">My Movies</a>
         </div>
 
+        <div class="px-32">
 
-        <div class="input_div m-10 ml-40 mr-40">
+            <div class="input_div m-10 ">
 
-            <div class="relative text-gray-600 focus-within:text-gray-400">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                  </button>
-                </span>
-                <input type="text" id="new-movie-name" name="q" class="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search movie title..." autocomplete="off">
+                <div class="relative text-gray-600 focus-within:text-gray-400">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
+                                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </span>
+                    <input type="text" id="new-movie-name" name="q"
+                        class="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                        placeholder="Search movie title..." autocomplete="off">
+                </div>
+
             </div>
 
-        </div>
-        <div class="card-display flex flex-wrap justify-center bg-black">
+            <div>
 
-            <!-- // 
 
-                TO DO separate top 20 chart vs search result. 
+                <div class="card-display flex flex-wrap justify-center bg-black">
 
-                TO DO when adding a movie, check if it already exists.  
-                
-                TO DO default poster is too short height wise. 
 
-                TO DO there is delay when searching. Improve time taken.
 
-                TO DO tell the user movie has been added to the list
-
-                TO DO enable movie removal from my list. 
-            -->
-
+                </div>
+            </div>
         </div>
 
     </div>
@@ -57,3 +56,18 @@
 </body>
 
 </html>
+
+<!-- // 
+
+                TO DO attach this <h3 class=" mx-10 " >In Cinema Now: Top 20</h3>
+
+                DONE when adding a movie, check if it already exists.  
+                
+                TO DO default poster is too short height wise. 
+
+                TO DO there is delay when searching. Improve time taken.
+
+                DONE tell the user movie has been added to the list
+
+                TO DO enable movie removal from my list. 
+            -->

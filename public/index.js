@@ -18,7 +18,7 @@ class item {
 		let movieBox = document.createElement('div');
 		movieBox.innerHTML = `
 		
-        <div class="relative w-4/5 shadow-lg group container m-auto rounded-md bg-white max-w-max  flex justify-center items-center  content-div">
+        <div class="relative w-4/5 my-5 shadow-lg group container rounded-md bg-white max-w-max  flex  content-div">
             <div>
                 <img class="movie-image object-scale-down" src="${itemName.img}">
             </div>
@@ -42,7 +42,7 @@ class item {
 
 
 		`
-		movieBox.classList.add('moviebox', 'p-5');
+		movieBox.classList.add('moviebox');
 		container.appendChild(movieBox)
 	}
 }
@@ -152,9 +152,10 @@ async function add(name, director, year, image) {
 
 	if(response.status == 200) {
 		alert("Movie added to my list");
+	} else if (response.status == 409) {
+		alert("Movie already exists");
 	} else {
 		alert("Error occured while adding movie");
-
 	}
 }
 
