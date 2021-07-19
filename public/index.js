@@ -39,8 +39,6 @@ class item {
 				</div>
 			</div>
         </div>
-
-
 		`
 		movieBox.classList.add('moviebox');
 		container.appendChild(movieBox)
@@ -50,13 +48,10 @@ class item {
 async function load() {
 
 	const loadURL = `https://api.themoviedb.org/3/discover/movie?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
-
 	fetch(loadURL).then(res => res.json()).then(data => {
 		showMovies(data.results);
 	})
 }
-
-
 
 //TO DO no director yet.
 async function getDirector(id) {
@@ -67,9 +62,7 @@ async function getDirector(id) {
 		data.crew.forEach(person => {
 			if (person.job == "Director") {
 				directorName = person.original_name;
-				console.log(directorName);
-				//console.log(typeof directorName);
-				//return directorName;
+				//console.log(directorName);
 			}
 		});
 		return directorName;
@@ -88,7 +81,6 @@ async function showMovies(results) {
 			data.crew.forEach(person => {
 				if (person.job == "Director") {
 					directorName = person.original_name;
-					//console.log(directorName);
 				}
 			});
 			
@@ -99,7 +91,7 @@ async function showMovies(results) {
 				movieImg = "/img/poster_not_found.jpg";
 			} else {
 				movieImg  = "https://image.tmdb.org/t/p/w342" + movie.poster_path
-				console.log(movieImg);
+				//console.log(movieImg);
 			}
 
 			let payload = {
@@ -120,7 +112,7 @@ async function showOptions() {
 	if (keyword == "") {
 		load();
 	} else {
-		console.log("the word being searched is " + keyword)
+		//console.log("the word being searched is " + keyword)
 
 		const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US&query=${keyword}&page=1&include_adult=false`
 
@@ -148,7 +140,7 @@ async function add(name, director, year, image) {
 		},
 		body: JSON.stringify(payload)
 	});
-	console.log(response.status);
+	//console.log(response.status);
 
 	if(response.status == 200) {
 		alert("Movie added to my list");
@@ -163,20 +155,18 @@ load();
 
 container.addEventListener('click', async e => {
 
-	//console.log("in the listener");
-
 	if (e.target && e.target.matches(".addButton")) {
 		const movieContainer = e.target.parentElement.parentElement.parentElement;
 
-		console.log(movieContainer);
+		//console.log(movieContainer);
 		const movieDirector = movieContainer.querySelector(".movie-director").innerHTML;
 		const movieTitle = movieContainer.querySelector(".movie-title").innerHTML;
 		const movieYear = movieContainer.querySelector(".movie-year").innerHTML;
 		const imgFullURL = movieContainer.querySelector(".movie-image").src;
 		const movieImg = imgFullURL.substring(31);
-		console.log(imgFullURL);
-		console.log(imgFullURL.substring(32));
-		console.log(imgFullURL.substring(31));
+		//console.log(imgFullURL);
+		//console.log(imgFullURL.substring(32));
+		//console.log(imgFullURL.substring(31));
 
 		add(movieTitle, movieDirector, movieYear, movieImg);
 	}
