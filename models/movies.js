@@ -17,7 +17,16 @@ const movie = new Schema({
     img: {
         type: String,
         required: true
+    },
+    keywords: {
+        type: Array,
+        required: false
+    },
+    movieID: {
+        type: String,
+        required: true
     }
+
 
 })
 

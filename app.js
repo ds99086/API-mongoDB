@@ -52,10 +52,10 @@ app.get('/', function (req, res) {
 
 app.post('/add', async function (req, res) {
   const newMovie = req.body;
-  //console.log(newMovie);
+  console.log(newMovie);
 
-  const checkDup = await Movie.exists(newMovie) 
-  //console.log(checkDup);
+  const checkDup = await Movie.exists({movieID: newMovie.movieID}) 
+  console.log("checking duplication result: "+ checkDup);
   if (checkDup == true) { 
     //console.log("sending status 409");
     res.sendStatus(409);

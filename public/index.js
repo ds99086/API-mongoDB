@@ -33,6 +33,7 @@ class item {
 					<div>
 						<p class="movie-year text-gray-100">${itemName.year}</p>
 					</div>	
+					<div class="movie-id invisible">${itemName.movieID}</div>
 				</div>
 				<div class=" place-self-center pt-10">
 					<button class="addButton  p-0 w-8 h-8    mb-4  text-base   font-semibold  focus:outline-none transition-colors duration-200 rounded-full block  bg-transparent hover:bg-red-700  border-red-700 border-2 text-red-700 hover:text-red-200">+</button>
@@ -74,6 +75,8 @@ async function showMovies(results) {
 	container.innerHTML = ``
 	results.forEach(movie => {
 
+
+
 		const searchURL = `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US`
 		let directorName = "Director can't be found";
 
@@ -98,8 +101,11 @@ async function showMovies(results) {
 				title: movie.original_title,
 				director: directorName,
 				year: movie.release_date,
-				img: movieImg
+				img: movieImg,
+				movieID: movie.id
 			} 
+
+			//console.log(payload)
 			new item(payload);
 		})
 	})
@@ -117,20 +123,35 @@ async function showOptions() {
 		const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US&query=${keyword}&page=1&include_adult=false`
 
 		fetch(searchURL).then(res => res.json()).then(data => {
-			//console.log(data.results); //checked
+			console.log(data.results); //checked
 			showMovies(data.results)
 		})
 	}
 }
 
-async function add(name, director, year, image) {
+async function add(name, director, year, image, movieID) {
+
+	let movieKeywords = []
+	const getKeyword = `https://api.themoviedb.org/3/movie/${movieID}/keywords?api_key=1b0424a520ba27ca4b58ed57e7db8ebf`
+	fetch(getKeyword).then(res => res.json()).then(data => {
+			//console.log(data.keywords)
+		data.keywords.forEach(keyword => {
+		movieKeywords.push(keyword.name);
+		})
+			
+			//console.log(movieKeywords)
+	})
 
 	const payload = {
 		title: name,
 		director: director,
 		year: year,
-		img: image
+		img: image,
+		movieID: movieID,
+		keywords: movieKeywords
 	};
+
+	console.log(payload)
 
 	const response = await fetch('/add', {
 		method: "POST",
@@ -164,11 +185,12 @@ container.addEventListener('click', async e => {
 		const movieYear = movieContainer.querySelector(".movie-year").innerHTML;
 		const imgFullURL = movieContainer.querySelector(".movie-image").src;
 		const movieImg = imgFullURL.substring(31);
+		const movieID = movieContainer.querySelector(".movie-id").innerHTML;
 		//console.log(imgFullURL);
 		//console.log(imgFullURL.substring(32));
 		//console.log(imgFullURL.substring(31));
 
-		add(movieTitle, movieDirector, movieYear, movieImg);
+		add(movieTitle, movieDirector, movieYear, movieImg, movieID);
 	}
 })
 searchBox.addEventListener('input', showOptions)

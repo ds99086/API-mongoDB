@@ -1,0 +1,1 @@
+const analysisContainer = document.querySelector('.movie-analysis-container');

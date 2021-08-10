@@ -31,6 +31,7 @@ class item {
 				<div>
 					<p class="movie-year text-gray-100">${itemName.year}</p>
 				</div>	
+				<div class="movie-id invisible">${itemName.movieID}</div>
 			</div>
 			<div class=" place-self-center pt-10">
 			<button class="removeButton  py-3 px-6    mb-4  text-base   font-semibold  focus:outline-none transition-colors duration-200 rounded-full block  bg-transparent hover:bg-red-700  border-red-700 border-2 text-red-700 hover:text-red-200">remove from my list</button>
