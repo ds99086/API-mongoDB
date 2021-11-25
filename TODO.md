@@ -14,3 +14,4 @@ TODO:
     - To Do inquire DB on analysis.html load to extract all tags. 
         - To Do count all tags occurence, display in graph. Plotly perhaps. 
 
+- change client side request to server side - sensiutive info (api key)

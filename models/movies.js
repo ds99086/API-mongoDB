@@ -25,6 +25,10 @@ const movie = new Schema({
     movieID: {
         type: String,
         required: true
+    },
+    genre: {
+        type: String,
+        required: false
     }
 
 

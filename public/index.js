@@ -7,7 +7,8 @@ const searchList = document.getElementById("search-dropdown");
 let baseURL = 'https://api.themoviedb.org/3/';
 let configData = null;
 let baseImageURL = null;
-const apiKEY = "1b0424a520ba27ca4b58ed57e7db8ebf";
+
+const API_KEY = "1b0424a520ba27ca4b58ed57e7db8ebf";
 
 class item {
 	constructor(itemName) {
@@ -17,7 +18,6 @@ class item {
 	createDiv(itemName) {
 		let movieBox = document.createElement('div');
 		movieBox.innerHTML = `
-		
         <div class="relative w-4/5 my-5 shadow-lg group container rounded-md bg-white max-w-max  flex  content-div">
             <div>
                 <img class="movie-image object-scale-down" src="${itemName.img}">
@@ -48,7 +48,7 @@ class item {
 
 async function load() {
 
-	const loadURL = `https://api.themoviedb.org/3/discover/movie?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
+	const loadURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
 	fetch(loadURL).then(res => res.json()).then(data => {
 		showMovies(data.results);
 	})
@@ -56,7 +56,7 @@ async function load() {
 
 //TO DO no director yet.
 async function getDirector(id) {
-	const searchURL = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US`
+	const searchURL = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
 
 	await fetch(searchURL).then(res => res.json()).then(data => {
 		let directorName = "Director can't be found";
@@ -75,9 +75,7 @@ async function showMovies(results) {
 	container.innerHTML = ``
 	results.forEach(movie => {
 
-
-
-		const searchURL = `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=1b0424a520ba27ca4b58ed57e7db8ebf&language=en-US`
+		const searchURL = `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
 		let directorName = "Director can't be found";
 
 		fetch(searchURL).then(res => res.json()).then(data => {
@@ -97,12 +95,15 @@ async function showMovies(results) {
 				//console.log(movieImg);
 			}
 
+
+
 			let payload = {
 				title: movie.original_title,
 				director: directorName,
 				year: movie.release_date,
 				img: movieImg,
-				movieID: movie.id
+				movieID: movie.id,
+				genre: movie.genre_ids
 			} 
 
 			//console.log(payload)
@@ -129,20 +130,10 @@ async function showOptions() {
 	}
 }
 
-async function add(name, director, year, image, movieID) {
+async function add(name, director, year, image, movieID, movieKeywords) {
 
-	let movieKeywords = []
-	const getKeyword = `https://api.themoviedb.org/3/movie/${movieID}/keywords?api_key=1b0424a520ba27ca4b58ed57e7db8ebf`
-	fetch(getKeyword).then(res => res.json()).then(data => {
-			//console.log(data.keywords)
-		data.keywords.forEach(keyword => {
-		movieKeywords.push(keyword.name);
-		})
-			
-			//console.log(movieKeywords)
-	})
-
-	const payload = {
+	console.log(movieKeywords);
+	let payload = {
 		title: name,
 		director: director,
 		year: year,
@@ -190,7 +181,17 @@ container.addEventListener('click', async e => {
 		//console.log(imgFullURL.substring(32));
 		//console.log(imgFullURL.substring(31));
 
-		add(movieTitle, movieDirector, movieYear, movieImg, movieID);
+		let movieKeywords = []
+		const getKeyword = `https://api.themoviedb.org/3/movie/${movieID}/keywords?api_key=1b0424a520ba27ca4b58ed57e7db8ebf`
+		fetch(getKeyword).then(res => res.json()).then(data => {
+				//console.log(data.keywords)
+			data.keywords.forEach(keyword => {
+			movieKeywords.push(keyword);
+			})
+				console.log(movieKeywords)	
+
+			add(movieTitle, movieDirector, movieYear, movieImg, movieID, movieKeywords);	
+		})
 	}
 })
 searchBox.addEventListener('input', showOptions)

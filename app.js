@@ -6,12 +6,13 @@ const bodyParser = require('body-parser');
 const Movie = require('./models/movies');
 const app = express();
 
+const API_KEY = "1b0424a520ba27ca4b58ed57e7db8ebf";
+
 //connect to MongoDB
-const dbURI = 'mongodb+srv://trial:pwd123@cluster0.vfjk3.mongodb.net/movieDB?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://admin:Admin123@cluster0.w82k2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => console.log("connected to db"))
   .catch((err) => console.log(err));
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
