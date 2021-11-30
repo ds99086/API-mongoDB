@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const Movie = require('./models/movies');
 const app = express();
 
+const fetch = require('node-fetch');
+
 const API_KEY = "1b0424a520ba27ca4b58ed57e7db8ebf";
 
 //connect to MongoDB
@@ -23,33 +25,6 @@ app.use(express.static(path.join(__dirname + '/public')));
 app.get('/', function (req, res) {
   res.render('index');
 });
-
-
-// app.post('/update-list', async function (req, res) {
-
-//   async function toFind(item) {
-//     const response = await Movie.find(item);
-//     console.log('Response => ', response);
-//     return response;
-//   }
-
-//   let userObj = req.body;
-
-//   const { oldname, oldemail, name, email } = req.body;
-
-//   const resp = await Movie.updateOne(
-//     {
-//       name: oldname
-//     },
-//     {
-//       $set: {
-//         name: name
-//       }
-//     })
-
-//   const result = await toFind(userObj);
-//   res.send(result);
-// });
 
 app.post('/add', async function (req, res) {
   const newMovie = req.body;
@@ -95,6 +70,50 @@ app.get('/load', async function (req, res) {
   res.send(response);
 })
 
+app.get('/loadAPIMovies', async function (req, res) {
+  console.log("i am in  the server");
+  const loadURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
+  const data = await fetch(loadURL).then(res => res.json())
+  //console.log(data);
+  res.json(data);
+
+})
+
+app.get('/getCastData/:id', async function (req, res) {
+  //console.log("i am  in the server2");
+  const id = req.params.id;
+  //console.log(id);
+  const loadURL = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+  const data = await fetch(loadURL).then(res => res.json())
+  res.json(data);
+  })
+  
+  app.get('/search/:keyword', async function (req, res) {
+    const keyword = req.params.keyword;
+    const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
+    const data = await fetch(searchURL).then(res => res.json())
+  res.json(data);
+  })
+
+  app.get('/getKeywords/:movieID', async function (req, res) {
+    const movieID = req.params.movieID;
+  
+  const getKeyword = `https://api.themoviedb.org/3/movie/${movieID}/keywords?api_key=1b0424a520ba27ca4b58ed57e7db8ebf`
+  try {
+    const data = await fetch(getKeyword).then(res => res.json())
+    res.json(data);
+  } catch {
+    res.status(401).send("This movie has no keywords yet");
+  }
+  
+})
+
+app.get('/getGenre/:movieID', async function (req, res) {
+  const movieID = req.params.movieID;
+const genreData = `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en-US`
+const data = await fetch(genreData).then(res => res.json())
+res.json(data);
+})
 
 app.listen(3000, function () {
   console.log("app listening on port 3000!");

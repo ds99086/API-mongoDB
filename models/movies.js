@@ -20,15 +20,15 @@ const movie = new Schema({
     },
     keywords: {
         type: Array,
-        required: false
+        required: true
     },
     movieID: {
         type: String,
         required: true
     },
     genre: {
-        type: String,
-        required: false
+        type: Array,
+        required: true
     }
 
 
