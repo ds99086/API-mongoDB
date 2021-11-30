@@ -3,28 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="tailwind.css" rel="stylesheet">
+
     <title>Document</title>
 </head>
 
-<body>
-    <h3>Film Finder</h3>
+<body class="h-full bg-black">
 
-    <a href="mymovies.html">My Movies</a>
+    <div class="flex flex-col bg-black justify-center text-gray-200">
 
-    <div class="input_div">
-        <input type="text" required id="new-movie-name" placeholder="Search movie title">
+        <div class="flex justify-between p-5 pl-40 pr-40 bg-gray-900 text-gray-200">
+            <a href="index.html" class="text-gray-200">Film Finder</a>
+
+            <a href="mymovies.html" class="text-gray-200">My Movies</a>
+            <a href="analysis.html" class="text-gray-200">Analysis</a>
+        </div>
+
+        <div class="px-32">
+
+            <div class="input_div m-10 ">
+
+                <div class="relative text-gray-600 focus-within:text-gray-400">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
+                                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </span>
+                    <input type="text" id="new-movie-name" name="q"
+                        class="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                        placeholder="Search movie title..." autocomplete="off">
+                </div>
+
+            </div>
+
+            <div>
+
+
+                <div class="card-display flex flex-wrap justify-center bg-black">
+
+
+
+                </div>
+            </div>
+        </div>
 
     </div>
-    <div class="card-display ">
 
-        <!-- // TO DO when adding a movie, check if it already exists.   -->
-
-    </div>
 
     <script src="index.js"></script>
+    
 </body>
 
 </html>
